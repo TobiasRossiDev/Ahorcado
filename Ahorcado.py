@@ -1,11 +1,23 @@
 from random import *
 
-palabras = ["Palangana", "Raquideo", "Salmonela", "Chinchulin", "Estrepitoso", "Planero"]
+import requests
 
 
-def elegir_palabra():
-    
-    return palabras[randint(0,5)]
+def obtener_palabra_desde_api():
+    url_api = "https://clientes.api.greenborn.com.ar/public-random-word"  # Reemplaza con la URL real de tu API
+    try:
+        response = requests.get(url_api)
+       
+        if response.status_code == 200:
+            palabra = response.json()[0]  # Ajusta según la estructura de tu respuesta JSON
+            return palabra
+        else:
+            print(f"Error al obtener la palabra. Código de estado: {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
 
 
 
@@ -15,9 +27,9 @@ def pedir_letra():
 
 
 def ahorcado():
-    palabra = list(elegir_palabra())
+    palabra = list(obtener_palabra_desde_api())
     tablero = []
-    vidas = 6
+    vidas = 10
     indice = 0   
     letra_encontrada = False #usar un bool me sirve para recorrer un array entero.
 
@@ -52,6 +64,7 @@ def ahorcado():
             print(f"Terminaste el juego!")    
         else:
             print(f"Perdiste!, la palabra era {palabra}")
+
 
 
 
