@@ -20,6 +20,11 @@ def obtener_palabra_desde_api():
 
 
 
+def jugar_de_nuevo():
+    respuesta = input("Querés jugar de nuevo? Si/No: ")
+    if respuesta == "Si":
+        ahorcado()
+
 
 def pedir_letra():
     return str(input("Elegí una letra: ")).upper()
@@ -62,9 +67,10 @@ def ahorcado():
     else:
         if vidas >0:
             print(f"Terminaste el juego!")    
+
         else:
             print(f"Perdiste!, la palabra era {palabra}")
-
+        jugar_de_nuevo()    
 
 
 
